@@ -53,6 +53,9 @@ Most importantly, **have fun!**
 
 You can [read](https://landing.google.com/sre/book/chapters/accelerating-sre-on-call.html#xref_training_disaster-rpg) a comprehensive example on how to conduct the exercise in the Google SRE book.
 
+### Featured
+
+The Wheel of Misfortune was established as a practice in [Open Practice Library](https://openpracticelibrary.com/) and this project was [featured](https://openpracticelibrary.com/practice/wheel-of-misfortune/) there.
 
 ### Resources
 
