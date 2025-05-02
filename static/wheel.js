@@ -95,10 +95,89 @@ d3.json("./incidents/general_incidents.json", function (error, data) {
                     d3.select("#incident p")
                         .html("<h4 class=\"f4 center mw6\">" + data[picked].title + "</h4>" + "<div id=\"play-area\"> <ol id =\"choices\"><ol></div>");
                     container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls(), loadStory(data[picked].inkstory));
-                   } else {
+                } else {
+                    if (data[picked].markdown) {
+                        fetch(data[picked].markdown)
+                            .then(response => response.ok ? response.text() : Promise.reject(new Error(`Failed to fetch markdown: ${response.statusText}`)))
+                            .then(markdownText => {
+                                const html = marked.parse(markdownText);
+                                const markdownContainer = document.querySelector('.markdown');
+                                if (markdownContainer) {
+                                    markdownContainer.innerHTML = html;
+                                } else {
+                                    console.warn('Markdown container not found.');
+                                }
+                            })
+                            .catch(error => console.error('Error fetching markdown:', error));
+                    }
+
                     //populate incident
+                    // Create a button to open the popup
                     d3.select("#incident p")
-                        .html("<h4 class=\"f4 center mw6\">" + data[picked].title + "</h4>" + data[picked].scenario);
+                        .html(
+                            "<h4 class=\"f4 center mw6\">" + data[picked].title + "</h4>" +
+                            data[picked].scenario +
+                            (data[picked].markdown != undefined ? "<br><button id=\"open-popup\" style=\"margin-top: 10px;\">View Details</button><div class=\"markdown\" style=\"display: none;\"></div>" : "")
+                        );
+
+                    // Add event listener to the button
+                    document.getElementById("open-popup").addEventListener("click", function () {
+                        // Create the popup container
+                        const popup = document.createElement("div");
+                        popup.style.position = "fixed";
+                        popup.style.top = "50%";
+                        popup.style.left = "50%";
+                        popup.style.transform = "translate(-50%, -50%)";
+                        popup.style.backgroundColor = "white";
+                        popup.style.padding = "20px";
+                        popup.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+                        popup.style.zIndex = "1000";
+                        popup.style.maxWidth = "80%";
+                        popup.style.maxHeight = "80%";
+                        popup.style.overflowY = "auto";
+
+                        // Create an overlay to detect clicks outside the popup
+                        const overlay = document.createElement("div");
+                        overlay.style.position = "fixed";
+                        overlay.style.top = "0";
+                        overlay.style.left = "0";
+                        overlay.style.width = "100%";
+                        overlay.style.height = "100%";
+                        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+                        overlay.style.zIndex = "999";
+
+                        // Add the markdown content to the popup
+                        const markdownContent = document.querySelector(".markdown");
+                        if (markdownContent) {
+                            popup.innerHTML = markdownContent.innerHTML;
+                        } else {
+                            popup.innerHTML = "<p>No content available.</p>";
+                        }
+
+                        // Add a close button to the popup
+                        const closeButton = document.createElement("button");
+                        closeButton.textContent = "Close";
+                        closeButton.style.marginTop = "10px";
+                        closeButton.style.display = "block";
+                        closeButton.style.marginLeft = "auto";
+                        closeButton.style.marginRight = "auto";
+                        closeButton.addEventListener("click", function () {
+                            document.body.removeChild(popup);
+                            document.body.removeChild(overlay);
+                        });
+
+                        popup.appendChild(closeButton);
+
+                        // Close the popup when clicking outside of it
+                        overlay.addEventListener("click", function () {
+                            document.body.removeChild(popup);
+                            document.body.removeChild(overlay);
+                        });
+
+                        // Append the overlay and popup to the body
+                        document.body.appendChild(overlay);
+                        document.body.appendChild(popup);
+                    });
                     container.on("click", spin, stopwatch.reset(), stopwatch.start(), changeControls());
                 }
                 oldrotation = rotation;
