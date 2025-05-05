@@ -111,7 +111,31 @@
 
     <article class="cf">
         <div class="mw mw-h center">
-            <div class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr">
+            <script>
+                function isStopwatchEnabled() {
+                    return document.getElementById("enable-stopwatch").checked;
+                }
+            
+                function toggleStopwatchVisibility() {
+                    const incidentActions = document.getElementById("incident-actions");
+                    const incidentProgress = document.getElementById("incident-progress");
+                    const stopwatchControls = document.getElementById("stopwatch-controls");
+                    if (isStopwatchEnabled()) {
+                        incidentActions.style.display = "block";
+                        incidentProgress.style.display = "block";
+                        stopwatchControls.style.display = "block";
+                    } else {
+                        incidentActions.style.display = "none";
+                        incidentProgress.style.display = "none";
+                        stopwatchControls.style.display = "none";
+                    }
+                }
+            
+                // Initialize visibility on page load
+                document.addEventListener("DOMContentLoaded", toggleStopwatchVisibility);
+            </script>
+
+            <div id="incident-actions" class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr">
                 <ul class="list">
                     <h4 class="f4 center mw6">Incident Actions</h4> &#128203;
                     <hr class="mw3 bb bw1 b--black-10">
@@ -134,7 +158,7 @@
                         <label for="fourth">RESOLVE</label></li>
                 </ul>
             </div>
-            <div class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr">
+            <div id="incident-progress" class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr">
                 <h4 class="f4 center mw6">Incident Progress</h4>&#128202;
                 <hr class="mw3 bb bw1 b--black-10">
                 <div class="sz pa3">
@@ -148,16 +172,21 @@
                     </div>
                 </div>
             </div>
-            <div class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr">
+            <div class="fl w-100 w-30-ns tc center bg-white br3 pa3 mv3 ba b--black-10 mbr" style="float: right">
                 <div class="timing">
                     <h4 class="f4 center mw6">Timing Controls</h4>&#9203;
                     <hr class="mw3 bb bw1 b--black-10">
-                    <div class="stopwatch pa3"></div>
-                    <button id="start" class="button" onClick="stopwatch.start();changeControls();">▶</button>
-                    <button id="restart" class="button"
-                        onClick="stopwatch.restart();stopwatch.clear();changeControls();">↻</button>
-                    <button id="lap" class="button" onClick="stopwatch.lap();">Lap</button>
-                    <ul class="results"></ul>
+                    <label>
+                        <input type="checkbox" id="enable-stopwatch" onChange="toggleStopwatchVisibility()">
+                        Enable Stopwatch
+                    </label>
+                    <div id="stopwatch-controls">
+                        <div class="stopwatch pa3"></div>
+                        <button id="start" class="button" onClick="if (isStopwatchEnabled()) stopwatch.start(); changeControls();">▶</button>
+                        <button id="restart" class="button" onClick="if (isStopwatchEnabled()) stopwatch.restart(); stopwatch.clear(); changeControls();">↻</button>
+                        <button id="lap" class="button" onClick="if (isStopwatchEnabled()) stopwatch.lap();">Lap</button>
+                        <ul class="results"></ul>
+                    </div>
                     <script src="static/stopwatch.js"></script>
                     <script src="static/ink.js"></script>
                     <script src="static/mainink.js"></script>
