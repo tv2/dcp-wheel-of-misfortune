@@ -22,9 +22,9 @@ Ensure that the volunteer is a member of `#major_incident` and `#dcp-wheel-of-mi
 
 ## ArgoCD
 
-Esnure the volunteer can log into the ArgoCD UI.
+Ensure the volunteer can log into the ArgoCD UI.
 
-The application report green in status, but health seems to be stuck in `Progressing` state.
+The application reports green in status, but health seems to be stuck in `Progressing` state.
 
 Inside the Argo app in the UI, the ReplicaSet seems to be degraded.
 

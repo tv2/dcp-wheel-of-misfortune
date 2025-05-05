@@ -45,6 +45,17 @@ define persona_developer
 	@echo
 endef
 
+define persona_kundecenter
+	@echo "Submitting a message as the "Kundecenter" persona to Slack."
+	@curl -X POST -H 'Content-type: application/json' --data '{ \
+		"username": "Kurt Undecenter", \
+		"icon_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Phone_calls_can_cause_anxiety_in_select_individuals..jpg", \
+		"text": $(1), \
+		"channel": "$(SLACK_CHANNEL)", \
+	}' "$(SLACK_WEBHOOK)"
+	@echo
+endef
+
 ###
 # Incidents
 ###
@@ -55,6 +66,28 @@ incident-failing-payments: check-aws-context get-secret
 	@echo "Initializing failing-payments incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are unable to submit orders for new subscriptions.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "The payment service seems to time out on requests. I do not know why. Need help from DCP...")
+
+# play-is-timing-out
+.PHONY: incident-play-is-timing-out
+incident-play-is-timing-out: check-aws-context get-secret
+	@echo "Initializing play-is-timing-out incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are unable to access play.tv2.dk.\nDevelopers from the product team and platform team has been contacted.")
+	$(call persona_developer, "I checked but the application looks healthy... I do not know why. Need help from DCP...")
+	$(call persona_kundecenter, "I am getting a lot of calls from customers who cannot access play.tv2.dk. They say that it is stuck loading for a long while but sometimes it DOES load successfully...")
+
+# multiple-applications-failing
+.PHONY: incident-multiple-applications-failing
+incident-multiple-applications-failing: check-aws-context get-secret
+	@echo "Initializing multiple-applications-failing incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nSeveral product teams are reporting failures in their critical applications.\nDevelopers from the product team and platform team has been contacted.")
+	$(call persona_developer, "I checked the application multiple pods seem to be stuck in pending. Other developers are reporting the same issue. I do not know why. Need help from DCP...")
+
+# waf-rate-limit
+.PHONY: incident-waf-rate-limit
+incident-waf-rate-limit: check-aws-context get-secret
+	@echo "Initializing waf-rate-limit incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are reporting issues accessing content on play.tv2.dk.\nDevelopers from the product team and platform team has been contacted.")
+	$(call persona_developer, "I am fairly sure the issue is related to the WAF rate limit. I have no idea how to increase it :oldshrug: please help us DCP.")
 
 ###
 # Building
