@@ -56,6 +56,17 @@ define persona_kundecenter
 	@echo
 endef
 
+define persona_clear_screen
+  @echo "Clearing the screen in Slack"
+	@curl -X POST -H 'Content-type: application/json' --data '{ \
+		"username": "Preben Edel", \
+		"icon_url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Workers_disinfect_schools_against_coronavirus_in_Bojnord_2020-02-26_08.jpg", \
+		"text": "Clearing the screen...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n:broom:", \
+		"channel": "$(SLACK_CHANNEL)", \
+	}' "$(SLACK_WEBHOOK)"
+	@echo
+endef
+
 ###
 # Incidents
 ###
@@ -103,3 +114,11 @@ run: build
 	@echo "Running the DCP Wheel of Misfortune application. Visit http://localhost:8080 to access it."
 	@echo
 	docker run -it --rm -p 8080:80 $(SECRET_ID)
+
+###
+# Misc
+###
+
+.PHONY: clear-slack
+clear-slack: check-aws-context get-secret
+	$(call persona_clear_screen)
