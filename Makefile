@@ -112,6 +112,13 @@ incident-terminating-pvc: check-aws-context get-secret
 	@echo "Initializing terminating-pvc incident..."
 	$(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim trying to roll out a new version of my application but the new pods never come up. what have i done wrong????")
 
+# tenant-applications-never-load
+.PHONY: incident-tenant-applications-never-load
+incident-tenant-applications-never-load: check-aws-context get-secret
+	@echo "Initializing tenant-applications-never-load incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCritical TV 2 Play application inaccessible.\nDevelopers from the product team and platform team has been contacted.")
+	$(call persona_developer, "I checked but the application seems to be healthy, but when accessing it i get the error below... I do not know why. Need help from DCP...")
+
 ###
 # Building
 ###
