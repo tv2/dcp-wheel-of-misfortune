@@ -28,5 +28,11 @@
         "title": "Incident 5",
         "scenario": "Observability doesn't work",
         "markdown": "notes/no-observability/notes.md"
+    },
+    {
+        "ID": "6",
+        "title": "Incident 6",
+        "scenario": "Why won't my pod start???",
+        "markdown": "notes/terminating-pvc/notes.md"
     }
 ]
