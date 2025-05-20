@@ -104,13 +104,13 @@ incident-waf-rate-limit: check-aws-context get-secret
 .PHONY: incident-no-observability
 incident-no-observability: check-aws-context get-secret
 	@echo "Initializing no-observability incident..."
-  $(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim looking at my dashboard for my critical application but it seems it is not getting any data?? Can you check what i have misconfigured?")
+	$(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim looking at my dashboard for my critical application but it seems it is not getting any data?? Can you check what i have misconfigured?")
 
 # terminating-pvc
 .PHONY: incident-terminating-pvc
 incident-terminating-pvc: check-aws-context get-secret
 	@echo "Initializing terminating-pvc incident..."
-  $(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim trying to roll out a new version of my application but the new pods never come up. what have i done wrong????")
+	$(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim trying to roll out a new version of my application but the new pods never come up. what have i done wrong????")
 
 ###
 # Building
