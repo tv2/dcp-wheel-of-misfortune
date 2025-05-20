@@ -22,5 +22,11 @@
         "title": "Incident 4",
         "scenario": "Emergency increase of WAF rate limit",
         "markdown": "notes/waf-rate-limit/notes.md"
+    },
+    {
+        "ID": "5",
+        "title": "Incident 5",
+        "scenario": "Observability doesn't work",
+        "markdown": "notes/no-observability/notes.md"
     }
 ]

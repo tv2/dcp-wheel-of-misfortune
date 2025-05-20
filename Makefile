@@ -100,6 +100,12 @@ incident-waf-rate-limit: check-aws-context get-secret
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are reporting issues accessing content on play.tv2.dk.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I am fairly sure the issue is related to the WAF rate limit. I have no idea how to increase it :oldshrug: please help us DCP.")
 
+# no-observability
+.PHONY: incident-no-observability
+incident-no-observability: check-aws-context get-secret
+	@echo "Initializing no-observability incident..."
+  $(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim looking at my dashboard for my critical application but it seems it is not getting any data?? Can you check what i have misconfigured?")
+
 ###
 # Building
 ###
