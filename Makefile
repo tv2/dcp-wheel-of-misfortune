@@ -1,23 +1,33 @@
-SLACK_WEBHOOK := ""
-SLACK_CHANNEL := ""
 SECRET_ID := "dcp-wheel-of-misfortune"
 
-.PHONY: check-aws-context
-check-aws-context:
-	@echo "Checking AWS CLI context..."
-	@ACCOUNT_ID=$$(aws sts get-caller-identity --query Account --output text) && \
-	if [ "$$ACCOUNT_ID" = "116172753206" ]; then \
-		echo "AWS CLI context is set to the correct account (ID: $$ACCOUNT_ID)."; \
-	else \
-		echo "Error: AWS CLI context is not set to the correct account. Current account ID: $$ACCOUNT_ID."; \
+.PHONY: help
+help:
+	@echo "Makefile for DCP Wheel of Misfortune"
+	@echo
+	@echo "Available targets:"
+	@echo "  help                Show this help message"
+	@echo "  incident-<name>     Initialize an incident with the specified name"
+	@echo "  build               Build the Docker image"
+	@echo "  run                 Run the Docker container"
+	@echo "  clear-slack         Clear the Slack screen"
+	@echo "  useless-chatter     Run a script that sends random messages to Slack"
+	@echo
+	@echo "To use many of the targets you must setup environment variables with Slack secrets:"
+	@echo '  export SLACK_WEBHOOK="$$(aws secretsmanager get-secret-value --secret-id "$(SECRET_ID)" --query SecretString --output text | jq -r '.SLACK_WEBHOOK')"'
+	@echo '  export SLACK_CHANNEL="$$(aws secretsmanager get-secret-value --secret-id "$(SECRET_ID)" --query SecretString --output text | jq -r '.SLACK_CHANNEL')"'
+
+.PHONY: check-env
+check-env:
+	@if [ -z "$(SLACK_WEBHOOK)" ]; then \
+		echo "Error: SLACK_WEBHOOK is not set."; \
+		make help; \
 		exit 1; \
 	fi
-
-.PHONY: get-secret
-get-secret:
-	$(eval SLACK_WEBHOOK := $(shell aws secretsmanager get-secret-value --secret-id $(SECRET_ID) --query SecretString --output text | jq -r '.SLACK_WEBHOOK'))
-	$(eval SLACK_CHANNEL := $(shell aws secretsmanager get-secret-value --secret-id $(SECRET_ID) --query SecretString --output text | jq -r '.SLACK_CHANNEL'))
-	@echo "SLACK_WEBHOOK and SLACK_CHANNEL loaded into Make variables."
+	@if [ -z "$(SLACK_CHANNEL)" ]; then \
+		echo "Error: SLACK_CHANNEL is not set."; \
+		make help; \
+		exit 1; \
+	fi
 
 ###
 # Personas
@@ -73,14 +83,14 @@ endef
 
 # failing-payments
 .PHONY: incident-failing-payments
-incident-failing-payments: check-aws-context get-secret
+incident-failing-payments: check-env
 	@echo "Initializing failing-payments incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are unable to submit orders for new subscriptions.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "The payment service seems to time out on requests. I do not know why. Need help from DCP...")
 
 # play-is-timing-out
 .PHONY: incident-play-is-timing-out
-incident-play-is-timing-out: check-aws-context get-secret
+incident-play-is-timing-out: check-env
 	@echo "Initializing play-is-timing-out incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are unable to access play.tv2.dk.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I checked but the application looks healthy... I do not know why. Need help from DCP...")
@@ -88,33 +98,33 @@ incident-play-is-timing-out: check-aws-context get-secret
 
 # multiple-applications-failing
 .PHONY: incident-multiple-applications-failing
-incident-multiple-applications-failing: check-aws-context get-secret
+incident-multiple-applications-failing: check-env
 	@echo "Initializing multiple-applications-failing incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nSeveral product teams are reporting failures in their critical applications.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I checked the application multiple pods seem to be stuck in pending. Other developers are reporting the same issue. I do not know why. Need help from DCP...")
 
 # waf-rate-limit
 .PHONY: incident-waf-rate-limit
-incident-waf-rate-limit: check-aws-context get-secret
+incident-waf-rate-limit: check-env
 	@echo "Initializing waf-rate-limit incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are reporting issues accessing content on play.tv2.dk.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I am fairly sure the issue is related to the WAF rate limit. I have no idea how to increase it :oldshrug: please help us DCP.")
 
 # no-observability
 .PHONY: incident-no-observability
-incident-no-observability: check-aws-context get-secret
+incident-no-observability: check-env
 	@echo "Initializing no-observability incident..."
 	$(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim looking at my dashboard for my critical application but it seems it is not getting any data?? Can you check what i have misconfigured?")
 
 # terminating-pvc
 .PHONY: incident-terminating-pvc
-incident-terminating-pvc: check-aws-context get-secret
+incident-terminating-pvc: check-env
 	@echo "Initializing terminating-pvc incident..."
 	$(call persona_developer, "*DIRECT MESSAGE*\n\nHi!\nim trying to roll out a new version of my application but the new pods never come up. what have i done wrong????")
 
 # tenant-applications-never-load
 .PHONY: incident-tenant-applications-never-load
-incident-tenant-applications-never-load: check-aws-context get-secret
+incident-tenant-applications-never-load: check-env
 	@echo "Initializing tenant-applications-never-load incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCritical TV 2 Play application inaccessible.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I checked but the application seems to be healthy, but when accessing it i get the error below... I do not know why. Need help from DCP...")
@@ -139,5 +149,14 @@ run: build
 ###
 
 .PHONY: clear-slack
-clear-slack: check-aws-context get-secret
+clear-slack: check-env
 	$(call persona_clear_screen)
+
+.PHONY: useless-chatter
+useless-chatter: check-env
+	@echo "Running useless chatter script..."
+	@echo
+	@echo "This script will run indefinitely and send messages to Slack every 1-20 seconds."
+	@echo "Press Ctrl+C to stop it."
+	@echo
+	@scripts/useless-chatter.sh
