@@ -49,7 +49,6 @@ In events they report:
 Under logs, the following error is shown:
 
 ```
-unable to provision node: failed to validate constraints: no instance types satisfy all constraints
 error validating NodePool "bottlerocket-amd64". NodePool spec is invalid.
 ```
 
@@ -66,7 +65,6 @@ Events do not show anything in particular.
 Karpenter logs show the following error:
 
 ```
-unable to provision node: failed to validate constraints: no instance types satisfy all constraints
 error validating NodePool "bottlerocket-amd64". NodePool spec is invalid.
 ```
 
