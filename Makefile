@@ -129,6 +129,20 @@ incident-tenant-applications-never-load: check-env
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCritical TV 2 Play application inaccessible.\nDevelopers from the product team and platform team has been contacted.")
 	$(call persona_developer, "I checked but the application seems to be healthy, but when accessing it i get the error below... I do not know why. Need help from DCP...")
 
+# hostname-unreachable
+.PHONY: incident-hostname-unreachable
+incident-hostname-unreachable: check-env
+	@echo "Initializing hostname-unreachable incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are unable to access play.tv2.dk.\nDevelopers from the affected product teams and the platform team has been contacted.\nDevelopers from several product teams suspect DNS issues.")
+	$(call persona_developer, "I checked the application it reports DNS issues... sounds like the same issue the other teams are facing :this-is-fine-fire: ")
+
+# unable-to-update-workload-in-cluster
+.PHONY: incident-unable-to-update-workload-in-cluster
+incident-unable-to-update-workload-in-cluster: check-env
+	@echo "Initializing unable-to-update-workload-in-cluster incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
+	$(call persona_developer, "we got an update ready that will fix this problem, but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
+
 ###
 # Building
 ###

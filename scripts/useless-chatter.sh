@@ -112,9 +112,9 @@ do
   personaImage=$(echo "$PERSONAS" | jq -r ".[$personaId].image")
   chatter=$(getRandomChatter)
 
-  postDebugMessage "$personaName" "$personaImage" "$chatter"
+  postMessage "$personaName" "$personaImage" "$chatter"
 
-  sleepTime="$(shuf -i 1-20 -n 1)"
+  sleepTime="$(shuf -i 5-30 -n 1)"
   echo "Successfully posted message from $personaName. Now sleeping for $sleepTime seconds."
   echo
   sleep "$sleepTime"

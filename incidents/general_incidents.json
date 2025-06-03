@@ -40,5 +40,17 @@
         "title": "Incident 7",
         "scenario": "Tenant applications never load",
         "markdown": "notes/tenant-applications-never-load/notes.md"
+    },
+    {
+        "ID": "8",
+        "title": "Incident 8",
+        "scenario": "Hostname unresolvable",
+        "markdown": "notes/hostname-unresolvable/notes.md"
+    },
+    {
+        "ID": "9",
+        "title": "Incident 9",
+        "scenario": "Unable to update workload in cluster",
+        "markdown": "notes/unable-to-update-workload-in-cluster/notes.md"
     }
 ]
