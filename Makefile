@@ -159,6 +159,18 @@ run: build
 	docker run -it --rm -p 8080:80 $(SECRET_ID)
 
 ###
+# Persona say
+###
+
+.PHONY: operations-center-say
+operations-center-say: check-env
+	$(call persona_operations_center, "$(shell read -p "Enter your message: " msg && echo "$$msg")")
+
+.PHONY: developer-say
+developer-say: check-env
+	$(call persona_developer, "$(shell read -p "Enter your message: " msg && echo "$$msg")")
+
+###
 # Misc
 ###
 
