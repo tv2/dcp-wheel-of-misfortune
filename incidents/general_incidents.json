@@ -1,56 +1,38 @@
 [
     {
+        "ID": "0",
+        "title": "Incident 0",
+        "scenario": "Unable to update workload in cluster",
+        "markdown": "notes/unable-to-update-workload-in-cluster/notes.md"
+    },
+    {
         "ID": "1",
         "title": "Incident 1",
-        "scenario": "Payment of new subscriptions are failing",
-        "markdown": "notes/failing-payments/notes.md"
+        "scenario": "Missing secrets",
+        "markdown": "notes/missing-secrets/notes.md"
     },
     {
         "ID": "2",
         "title": "Incident 2",
-        "scenario": "play.tv2.dk is timing out",
-        "markdown": "notes/play-is-timing-out/notes.md"
+        "scenario": "Can't pull image after image update",
+        "markdown": "notes/cant-pull-image-after-update/notes.md"
     },
     {
         "ID": "3",
         "title": "Incident 3",
-        "scenario": "Multiple applications are failing",
-        "markdown": "notes/multiple-applications-failing/notes.md"
+        "scenario": "Increase namespace limits",
+        "markdown": "notes/increase-namespace-limits/notes.md"
     },
     {
         "ID": "4",
         "title": "Incident 4",
-        "scenario": "Emergency increase of WAF rate limit",
-        "markdown": "notes/waf-rate-limit/notes.md"
+        "scenario": "Create new load balancer",
+        "markdown": "notes/create-new-loadbalancer/notes.md"
     },
     {
         "ID": "5",
         "title": "Incident 5",
-        "scenario": "Observability doesn't work",
-        "markdown": "notes/no-observability/notes.md"
-    },
-    {
-        "ID": "6",
-        "title": "Incident 6",
-        "scenario": "Why won't my pod start???",
-        "markdown": "notes/terminating-pvc/notes.md"
-    },
-    {
-        "ID": "7",
-        "title": "Incident 7",
-        "scenario": "Tenant applications never load",
-        "markdown": "notes/tenant-applications-never-load/notes.md"
-    },
-    {
-        "ID": "8",
-        "title": "Incident 8",
-        "scenario": "Hostname unresolvable",
-        "markdown": "notes/hostname-unresolvable/notes.md"
-    },
-    {
-        "ID": "9",
-        "title": "Incident 9",
-        "scenario": "Unable to update workload in cluster",
-        "markdown": "notes/unable-to-update-workload-in-cluster/notes.md"
+        "scenario": "Increase gateway quota",
+        "markdown": "notes/increase-gateway-quota/notes.md"
     }
 ]
