@@ -1,4 +1,4 @@
-SECRET_ID := "dcp-wheel-of-misfortune"
+SECRET_ID := dcp-wheel-of-misfortune
 
 .PHONY: help
 help:

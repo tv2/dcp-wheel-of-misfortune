@@ -1,3 +1,7 @@
+# How to install
+1. Install coreutils (brew install coreutils)
+2. Use CCS-dev administrator profile (for reading slack secrets/webhook)
+
 # Wheel of Misfortune
 **Wheel of Misfortune** is a game that aims to build confidence in on-call engineers via simulated outage scenarios.
 With the game, you practice problem debugging under stress, understanding the incident management protocol,

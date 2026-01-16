@@ -114,7 +114,7 @@ do
 
   postMessage "$personaName" "$personaImage" "$chatter"
 
-  sleepTime="$(shuf -i 5-30 -n 1)"
+  sleepTime="$(gshuf -i 5-30 -n 1)"
   echo "Successfully posted message from $personaName. Now sleeping for $sleepTime seconds."
   echo
   sleep "$sleepTime"
