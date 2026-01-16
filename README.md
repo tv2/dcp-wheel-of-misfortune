@@ -2,6 +2,13 @@
 1. Install coreutils (brew install coreutils)
 2. Use CCS-dev administrator profile (for reading slack secrets/webhook)
 
+
+# Versions
+We currently have two versions of the WoMF - one for level 2 and one for level3. For now, each level is on a seperate branch.
+
+Level2: https://github.com/tv2/dcp-wheel-of-misfortune/tree/levels/2
+Level3: https://github.com/tv2/dcp-wheel-of-misfortune/tree/levels/3
+
 # Wheel of Misfortune
 **Wheel of Misfortune** is a game that aims to build confidence in on-call engineers via simulated outage scenarios.
 With the game, you practice problem debugging under stress, understanding the incident management protocol,
