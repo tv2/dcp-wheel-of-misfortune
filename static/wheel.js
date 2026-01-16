@@ -15,7 +15,29 @@ var padding = { top: 20, right: 40, bottom: 0, left: 0 },
     picked = 100000,
     oldpick = [];
 
-d3.json("./incidents/general_incidents.json", function (error, data) {
+function getIncidentFile() {
+    var levelSelect = document.getElementById("level-select");
+    if (levelSelect) {
+        var level = levelSelect.value;
+        return "./incidents/" + level + "_incidents.json";
+    }
+    return "./incidents/level1_incidents.json";
+}
+
+function reloadWheel() {
+    // Clear existing wheel
+    d3.select("#wheel").selectAll("*").remove();
+    // Reset state
+    rotation = 0;
+    oldrotation = 0;
+    picked = 100000;
+    oldpick = [];
+    // Reload wheel with new incidents
+    loadWheel();
+}
+
+function loadWheel() {
+d3.json(getIncidentFile(), function (error, data) {
     if (error) throw error;
     var svg = d3.select("#wheel")
         .append("svg")
@@ -214,3 +236,7 @@ d3.json("./incidents/general_incidents.json", function (error, data) {
     }
 
 });
+}
+
+// Initial load
+loadWheel();

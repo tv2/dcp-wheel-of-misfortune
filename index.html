@@ -96,6 +96,13 @@
     <article class="cf mw mw-h center bg-white br3 mv4 ba b--black-10">
         <div class="fl w-100 w-50-ns tc pa3">
             <h4 class="f4 center mw6">Spin the Wheel!</h4> &#128223;
+            <div class="pa2">
+                <label for="level-select" class="f5 b">Select Engineer Level: </label>
+                <select id="level-select" class="pa2 ba b--black-20 br2" onchange="reloadWheel()">
+                    <option value="level1">Level 1</option>
+                    <option value="level2">Level 2</option>
+                </select>
+            </div>
             <hr class="mw3 bb bw1 b--black-10">
             <div id="wheel"></div>
             <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
