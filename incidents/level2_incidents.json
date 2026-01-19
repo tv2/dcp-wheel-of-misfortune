@@ -14,19 +14,19 @@
     {
         "ID": "2",
         "title": "Incident 2",
-        "scenario": "Increase gateway quota",
-        "markdown": "notes/increase-gateway-quota/notes.md"
+        "scenario": "Play is timing out",
+        "markdown": "notes/play-is-timing-out/notes.md"
     },
     {
         "ID": "3",
         "title": "Incident 3",
-        "scenario": "Missing secrets",
+        "scenario": "Pods cannot start 1",
         "markdown": "notes/missing-secrets/notes.md"
     },
     {
         "ID": "4",
         "title": "Incident 4",
-        "scenario": "Can't pull image after image update",
+        "scenario": "Can't pull image after new image version",
         "markdown": "notes/cant-pull-image-after-update/notes.md"
     },
     {
