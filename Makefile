@@ -143,6 +143,11 @@ incident-unable-to-update-workload-in-cluster: check-env
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
 	$(call persona_developer, "we got an update ready that will fix this problem, but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
 
+.PHONY: incident-cant-pull-image-after-update
+	@echo "Initializing cant-pull-image-after-update incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
+	$(call persona_developer, "we got an update ready that will fix this problem, but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
+
 ###
 # Building
 ###

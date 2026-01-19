@@ -7,8 +7,8 @@ A colleague from Operations Center calls you to report an incident is going on a
 # Prep
 make incident-cant-pull-image-after-update
 
-
 # Choices
-...
 ## kubectl
+Shows pod is failing to start
 ## argocd
+Sees application is failing and the new nersion of the pod is failing
