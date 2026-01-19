@@ -11,6 +11,7 @@ help:
 	@echo "  run                 Run the Docker container"
 	@echo "  clear-slack         Clear the Slack screen"
 	@echo "  useless-chatter     Run a script that sends random messages to Slack"
+	@echo "  load-test           Run k6 load test against the target URL"
 	@echo
 	@echo "To use many of the targets you must setup environment variables with Slack secrets:"
 	@echo '  export SLACK_WEBHOOK="$$(aws secretsmanager get-secret-value --secret-id "$(SECRET_ID)" --query SecretString --output text | jq -r '.SLACK_WEBHOOK')"'
@@ -141,12 +142,32 @@ incident-hostname-unreachable: check-env
 incident-unable-to-update-workload-in-cluster: check-env
 	@echo "Initializing unable-to-update-workload-in-cluster incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
-	$(call persona_developer, "we got an update ready that will fix this problem, but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
+	$(call persona_developer, "we got an update ready that will fix this problem but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
 
 .PHONY: incident-cant-pull-image-after-update
+incident-cant-pull-image-after-update: check-env
 	@echo "Initializing cant-pull-image-after-update incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
-	$(call persona_developer, "we got an update ready that will fix this problem, but our GitHub Actions workflow is broken. DCP can you please update the workload in the cluster to the image tag v4.6.3 please ?")
+	$(call persona_developer, "We got an update ready that will fix this problem but we cannot deploy the new version of the pods. DCP can you please help ? The domain that we need to push and update to is https://womf-incident-001-nginx.ccs.d.tv2dev.dk/")
+
+.PHONY: incident-randomly-crashing-pod
+incident-randomly-crashing-pod: check-env
+	@echo "Initializing randomly-crashing-pod incident..."
+	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\nCustomers are experiencing instability in the application.\nDevelopers from the product team and platform team has been contacted.")
+	$(call persona_developer, "Our application pods are randomly crashing without any clear reason. We need DCP to investigate what is the underlying issue")
+
+
+.PHONY: create-new-loadbalancer
+create-new-loadbalancer: check-env
+	@echo "Creating a new load balancer for testing purposes..."
+	$(call persona_developer, "Hi DCP. Can you please create a new load balancer for our application? We need our application to be reachable from on-prem storage")
+
+.PHONY: missing-secrets
+missing-secrets: check-env
+	@echo "Initializing missing-secrets incident..."
+	$(call persona_developer, ":alert: *MAJOR INCIDENT* :alert:\n\n DCP: after Disaster recovery(we got hacked :()), we cannot start a critical application due to a missing secret.\n")
+	$(call persona_developer, "We have justed finished moving our AWS resources to a new AWS Account. We have moved the secret to the new AWS account (667540652016). Our application is failing to start because it cannot find the required secrets. Can you please help us figure out what has happened?")
+
 
 ###
 # Building

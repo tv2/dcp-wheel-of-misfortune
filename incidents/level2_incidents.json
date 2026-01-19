@@ -8,16 +8,16 @@
     {
         "ID": "2",
         "title": "Incident 2",
-        "scenario": "Unable to update workload in cluster",
-        "markdown": "notes/unable-to-update-workload-in-cluster/notes.md"
-    },
-    {
-        "ID": "3",
-        "title": "Incident 3",
         "scenario": "Create new load balancer",
         "markdown": "notes/create-new-loadbalancer/notes.md"
     },
     {
+        "ID": "3",
+        "title": "Incident 3",
+        "scenario": "Randomly crashing pod",
+        "markdown": "notes/incident-randomly-crashing-pod/notes.md"
+    },
+    { 
         "ID": "4",
         "title": "Incident 4",
         "scenario": "Play is timing out",
@@ -30,9 +30,15 @@
         "markdown": "notes/missing-secrets/notes.md"
     },
     {
-        "ID": "7",
-        "title": "Incident 7",
+        "ID": "6",
+        "title": "Incident 6",
         "scenario": "Increase namespace limits",
         "markdown": "notes/increase-namespace-limits/notes.md"
-    }
+    },
+    {
+        "ID": "7",
+        "title": "Incident 7",
+        "scenario": "Unable to update workload in cluster",
+        "markdown": "notes/unable-to-update-workload-in-cluster/notes.md"
+    },
 ]
