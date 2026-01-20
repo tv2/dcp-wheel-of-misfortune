@@ -6,6 +6,8 @@ They don't care about the domain
 
 # Introduction
 A developer asks for a new loadballancer for their application in dev. They are CCS-tenant
+Link to Argocd application:
+https://argo.ccs.d.tv2dev.dk/applications/ccs-argocd/womf-incident-002-nginx?view=tree&resource=
 
 
 Resolution:

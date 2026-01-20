@@ -1,5 +1,5 @@
 # Context
-OC is calling, a team has problems with their application restarts randomly and it appears to be related to the amount of incoming traffic.  
+OC is calling, a team has problems with their application restarts randomly and it appears to be random
 
 # Introduction
 The pods are failing randomly and their logs doesn't tell them way. They need you to investigate why it's randomly crashing

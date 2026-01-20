@@ -7,5 +7,8 @@ During major incident, a tenant has discovered they need to scale out more. they
 Tenant has a namespace limit of 20 pods and they need to increase it to 50 pods.
 
 # Prep
+```
+make increase-namespace-limits
+```
 
 # Choices

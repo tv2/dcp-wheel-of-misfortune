@@ -148,7 +148,7 @@ incident-unable-to-update-workload-in-cluster: check-env
 incident-cant-pull-image-after-update: check-env
 	@echo "Initializing cant-pull-image-after-update incident..."
 	$(call persona_operations_center, ":alert: *MAJOR INCIDENT* :alert:\n\ntv2.dk is down")
-	$(call persona_developer, "We got an update ready that will fix this problem but we cannot deploy the new version of the pods. DCP can you please help ? The domain that we need to push and update to is https://womf-incident-001-nginx.ccs.d.tv2dev.dk/")
+	$(call persona_developer, "We got an update ready that will fix this problem but we cannot deploy the new version of the docker image. I think I have updated the image tag after rebuilding the image. We have not had time to configure pixl yet... The domain that we need to push and update to is https://womf-incident-001-nginx.ccs.d.tv2dev.dk/")
 
 .PHONY: incident-randomly-crashing-pod
 incident-randomly-crashing-pod: check-env
@@ -160,7 +160,7 @@ incident-randomly-crashing-pod: check-env
 .PHONY: create-new-loadbalancer
 create-new-loadbalancer: check-env
 	@echo "Creating a new load balancer for testing purposes..."
-	$(call persona_developer, "Hi DCP. Can you please create a new load balancer for our application? We need our application to be reachable from on-prem storage")
+	$(call persona_developer, "Hi DCP. Can you please create a new load balancer for our application? We need our application to be reachable from on-prem storage only")
 
 .PHONY: missing-secrets
 missing-secrets: check-env
@@ -168,6 +168,11 @@ missing-secrets: check-env
 	$(call persona_developer, ":alert: *MAJOR INCIDENT* :alert:\n\n DCP: after Disaster recovery(we got hacked :()), we cannot start a critical application due to a missing secret.\n")
 	$(call persona_developer, "We have justed finished moving our AWS resources to a new AWS Account. We have moved the secret to the new AWS account (667540652016). Our application is failing to start because it cannot find the required secrets. Can you please help us figure out what has happened?")
 
+
+.PHONY: increase-namespace-limits
+increase-namespace-limits: check-env
+	@echo "Initializing increase-namespace-limits incident..."
+	$(call persona_developer, "Help ! We need to scale out but for some reason we can only create 20 pods but we estimate we need 50 pods to handle the load. Help DCP!")
 
 ###
 # Building
