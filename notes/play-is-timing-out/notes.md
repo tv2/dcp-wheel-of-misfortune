@@ -12,6 +12,7 @@ A thread is running in `#major_incident` in Slack
 
 ```bash
 make incident-play-is-timing-out
+make incident-play-is-timing-out-loadtest
 ```
 
 # Choices

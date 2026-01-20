@@ -174,6 +174,12 @@ increase-namespace-limits: check-env
 	@echo "Initializing increase-namespace-limits incident..."
 	$(call persona_developer, "Help ! We need to scale out but for some reason we can only create 20 pods but we estimate we need 50 pods to handle the load. Help DCP!")
 
+.PHONY: incident-play-is-timing-out
+incident-play-is-timing-out-loadtest: check-env
+	@echo "Starting k6 loadtest"
+	@scripts/run-k6-loadtest.sh
+
+
 ###
 # Building
 ###
